@@ -53,14 +53,14 @@ document.
 #### shape
 A shape is 2D geometrical object, such as a circle or polygon.
 
-#### rigid body
+#### rigid body[刚体]
 A chunk of matter that is so strong that the distance between any two
 bits of matter on the chunk is constant. They are hard like a diamond.
 In the following discussion we use body interchangeably with rigid body.
 
 #### fixture
 A fixture binds a shape to a body and adds material properties such as
-density, friction, and restitution. A fixture puts a shape into the
+density, friction[摩擦力], and restitution[反弹]. A fixture puts a shape into the
 collision system (broad-phase) so that it can collide with other shapes.
 
 #### constraint
@@ -78,7 +78,7 @@ constraints; they are created automatically by Box2D.
 
 #### joint
 This is a constraint used to hold two or more bodies together. Box2D
-supports several joint types: revolute, prismatic, distance, and more.
+supports several joint types: revolute[旋转关节], prismatic[棱柱关节,沿着公共轴滑动], distance[距离关节], and more.
 Some joints may have limits and motors.
 
 #### joint limit
@@ -95,7 +95,7 @@ A physics world is a collection of bodies, fixtures, and constraints
 that interact together. Box2D supports the creation of multiple worlds,
 but this is usually not necessary or desirable.
 
-#### solver
+#### solver[求解器]
 The physics world has a solver that is used to advance time and to
 resolve contact and joint constraints. The Box2D solver is a high
 performance iterative solver that operates in order N time, where N is
@@ -107,7 +107,7 @@ intervention this can lead to tunneling.
 ![Tunneling Effect](images/tunneling1.svg)
 
 Box2D contains specialized algorithms to deal with tunneling. First, the
-collision algorithms can interpolate the motion of two bodies to find
+collision algorithms can interpolate[插值] the motion of two bodies to find
 the first time of impact (TOI). Second, there is a sub-stepping solver
 that moves bodies to their first time of impact and then resolves the
 collision.
