@@ -356,7 +356,7 @@ single time step.
 ![Tunneling](images/tunneling2.svg)
 
 The `b2TimeOfImpact` function is used to determine the time when two
-moving shapes collide. This is called the *time of impact* (TOI). The
+moving shapes collide. This is called the *time of impact* (TOI 碰撞时间). The
 main purpose of `b2TimeOfImpact` is for tunnel prevention. In particular,
 it is designed to prevent moving objects from tunneling outside of
 static level geometry.

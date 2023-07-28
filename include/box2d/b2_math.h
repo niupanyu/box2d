@@ -85,7 +85,7 @@ struct B2_API b2Vec2
 		x *= a; y *= a;
 	}
 
-	/// Get the length of this vector (the norm).
+	/// Get the length of this vector (the norm).计算长度或模
 	float Length() const
 	{
 		return b2Sqrt(x * x + y * y);
@@ -98,7 +98,7 @@ struct B2_API b2Vec2
 		return x * x + y * y;
 	}
 
-	/// Convert this vector into a unit vector. Returns the length.
+	/// Convert this vector into a unit vector. Returns the length. 归一化，得到一个单位向量
 	float Normalize()
 	{
 		float length = Length();
@@ -119,7 +119,8 @@ struct B2_API b2Vec2
 		return b2IsValid(x) && b2IsValid(y);
 	}
 
-	/// Get the skew vector such that dot(skew_vec, other) == cross(vec, other)
+	/// Get the skew[偏斜] vector such that dot(skew_vec, other) == cross(vec, other)
+	// 计算二维空间中向量的垂直向量(或法向量，新向量与原向量垂直，方向为逆时针旋转90°),处理碰撞时计算反射向量
 	b2Vec2 Skew() const
 	{
 		return b2Vec2(-y, x);
@@ -283,12 +284,12 @@ struct B2_API b2Mat33
 	b2Vec3 ex, ey, ez;
 };
 
-/// Rotation
+/// Rotation 旋转类
 struct B2_API b2Rot
 {
 	b2Rot() = default;
 
-	/// Initialize from an angle in radians
+	/// Initialize from an angle in radians[弧度,单位为π,与dgree是等价的 180°=π]
 	explicit b2Rot(float angle)
 	{
 		/// TODO_ERIN optimize
@@ -333,7 +334,7 @@ struct B2_API b2Rot
 	float s, c;
 };
 
-/// A transform contains translation and rotation. It is used to represent
+/// A transform contains translation[平移] and rotation[旋转]. It is used to represent
 /// the position and orientation of rigid frames.
 struct B2_API b2Transform
 {

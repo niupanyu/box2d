@@ -164,7 +164,7 @@ struct B2_API b2RayCastOutput
 	float fraction;
 };
 
-/// An axis aligned bounding box.
+/// An axis aligned bounding box.[缩写为AABB，计算轴对齐包围盒，表示物体在二维空间中所占据的区域(矩形，其边与坐标轴平行)，使用AABB用于碰撞检测，物体剔除和空间划分等任务]
 struct B2_API b2AABB
 {
 	/// Verify that the bounds are sorted.

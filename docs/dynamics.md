@@ -25,14 +25,14 @@ Bodies have position and velocity. You can apply forces, torques, and
 impulses to bodies. Bodies can be static, kinematic, or dynamic. Here
 are the body type definitions:
 
-#### b2_staticBody
+#### b2_staticBody[静态刚体,自身不动也不受碰撞影响]
 A static body does not move under simulation and behaves as if it has
 infinite mass. Internally, Box2D stores zero for the mass and the
 inverse mass. Static bodies can be moved manually by the user. A static
 body has zero velocity. Static bodies do not collide with other static
 or kinematic bodies.
 
-#### b2_kinematicBody
+#### b2_kinematicBody[运动学刚体,它的运动受到预先设定(程序代码)的速度和方向的控制，而不受物理引擎中的力和碰撞影响；常用于实现不受物理规律约束的游戏对象，比如电梯等，这些对象的运动轨迹是预先设定，不与其他物体生碰撞而改变]
 A kinematic body moves under simulation according to its velocity.
 Kinematic bodies do not respond to forces. They can be moved manually by
 the user, but normally a kinematic body is moved by setting its
@@ -40,7 +40,7 @@ velocity. A kinematic body behaves as if it has infinite mass, however,
 Box2D stores zero for the mass and the inverse mass. Kinematic bodies do
 not collide with other kinematic or static bodies.
 
-#### b2_dynamicBody
+#### b2_dynamicBody[动态刚体]
 A dynamic body is fully simulated. They can be moved manually by the
 user, but normally they move according to forces. A dynamic body can
 collide with all body types. A dynamic body always has finite, non-zero
@@ -142,7 +142,7 @@ values the damping effect is mostly independent of the time step. At
 larger damping values, the damping effect will vary with the time step.
 This is not an issue if you use a fixed time step (recommended).
 
-### Gravity Scale
+### Gravity[重力] Scale
 You can use the gravity scale to adjust the gravity on a single body. Be
 careful though, increased gravity can decrease stability.
 
@@ -207,7 +207,7 @@ to use CCD. For example, you may want to shoot a high speed bullet at a
 stack of dynamic bricks. Without CCD, the bullet might tunnel through
 the bricks.
 
-Fast moving objects in Box2D can be labeled as bullets. Bullets will
+Fast moving(高速移动) objects in Box2D can be labeled as bullets. Bullets will
 perform CCD with both static and dynamic bodies. You should decide what
 bodies should be bullets based on your game design. If you decide a body
 should be treated as a bullet, use the following setting.
@@ -362,7 +362,7 @@ const b2Vec2& b2Body::GetWorldCenter() const;
 const b2Vec2& b2Body::GetLocalCenter() const;
 ```
 
-You can access the linear and angular velocity. The linear velocity is
+You can access the linear and angular velocity[角速度]. The linear velocity[线速度] is
 for the center of mass. Therefore, the linear velocity may change if the
 mass properties change.
 

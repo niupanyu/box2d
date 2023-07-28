@@ -36,7 +36,7 @@
 
 ## Dynamics
 - Joint limits are now predictive and not stateful
-- Experimental 2D cloth (rope)
+- Experimental 2D cloth[布料] (rope)
 - b2Body::SetActive -> b2Body::SetEnabled
 - Better support for running multiple worlds
 - Handle zero density better

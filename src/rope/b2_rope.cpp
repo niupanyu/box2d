@@ -705,7 +705,7 @@ void b2Rope::SolveBend_PBD_Distance()
 }
 
 // Constraint based implementation of:
-// P. Volino: Simple Linear Bending Stiffness in Particle Systems
+// P. Volino: Simple Linear Bending Stiffness in Particle[粒子] Systems
 void b2Rope::SolveBend_PBD_Height()
 {
 	const float stiffness = m_tuning.bendStiffness;
