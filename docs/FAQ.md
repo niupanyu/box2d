@@ -95,20 +95,20 @@ Box2D uses approximate methods for a few reasons.
 * Some differential equations don't have known solutions
 * Some constraints cannot be determined uniquely
 
-What this means is that constraints are not perfectly rigid and sometimes you will see some bounce even when the restitution is zero.
+What this means is that constraints are not perfectly rigid and sometimes you will see some bounce even when the restitution[恢复系数] is zero.
 Box2D uses Gauss-Seidel to approximately solve constraints.
-Box2D also uses Semi-implicit Euler to approximately solve the differential equations.
-Box2D also does not have exact collision. Polygons are covered with a thin skin (around 0.5cm thick) to avoid numerical problems. This can sometimes lead to unexpected contact normals. Also, some shapes may begin to overlap and then be pushed apart by the solver.
+Box2D also uses Semi-implicit Euler to approximately solve the differential equations[微分方程].
+Box2D also does not have exact collision. Polygons are covered with a thin skin (around 0.5cm thick) to avoid numerical problems. This can sometimes lead to unexpected contact normals[法线]. Also, some shapes may begin to overlap and then be pushed apart by the solver.
 
 ## Making Games
 
 ### Worms Clones
 
-Making a worms clone requires arbitrarily destructible terrain. This is beyond the scope of Box2D, so you will have to figure out how to do this on your own.
+Making a worms clone requires arbitrarily destructible terrain[地形]. This is beyond the scope of Box2D, so you will have to figure out how to do this on your own.
 
 ### Tile Based Environment
 
-Using many boxes for your terrain may not work well because box-like characters can get snagged on internal corners. A future update to Box2D should allow for smooth motion over edge chains. In general you should avoid using a rectangular character because collision tolerances will still lead to undesirable snagging.
+Using many boxes for your terrain may not work well because box-like characters can get snagged on internal corners(角色被内部角落卡住而无法通过). A future update to Box2D should allow for smooth motion over edge chains. In general you should avoid using a rectangular character because collision tolerances will still lead to undesirable snagging.
 
 ### Asteroid Type Coordinate Systems
 
@@ -140,7 +140,7 @@ The only remaining question is how do we make it convenient. On this opinions ma
 
 * Using pixels for length instead of meters.
 * Expecting Box2D to give pixel perfect results.
-* Using b2Polygon to create concave polygons.
+* Using b2Polygon to create concave polygons[凹多边形].
 * Testing their code in release mode.
 * Not learning C++ before using Box2D.
 * Not reading this FAQ. :)

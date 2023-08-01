@@ -18,7 +18,7 @@ b2Settings.h. Normally you do not need to adjust these constants.
 
 Box2D uses floating point math for collision and simulation. Due to
 round-off error some numerical tolerances are defined. Some tolerances
-are absolute and some are relative. Absolute tolerances use MKS units.
+are absolute and some are relative. Absolute tolerances use MKS units.(绝对公差：米-千克-秒)
 
 ### Allocation wrappers
 The settings file defines b2Alloc and b2Free for large allocations. You
@@ -50,7 +50,7 @@ heap traffic.
 Since Box2D uses a SOA, you should never new or malloc a body, fixture,
 or joint. However, you do have to allocate a b2World on your own. The
 b2World class provides factories for you to create bodies, fixtures, and
-joints. This allows Box2D to use the SOA and hide the gory details from
+joints. This allows Box2D to use the SOA and hide the gory[血淋淋的] details from
 you. Never, call delete or free on a body, fixture, or joint.
 
 While executing a time step, Box2D needs some temporary workspace

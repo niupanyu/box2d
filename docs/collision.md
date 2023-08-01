@@ -1,6 +1,6 @@
-# Collision Module
+# Collision Module[碰撞模块]
 The Collision module contains shapes and functions that operate on them.
-The module also contains a dynamic tree and broad-phase to acceleration
+The module also contains a dynamic tree[动态树] and broad-phase[粗检测阶段:遍历全局场景空间区分结构，尽可能的排除那些不会发生碰撞的物体，相关的实现算法有四叉树，八叉树和空间哈希] to acceleration
 collision processing of large systems.
 
 The collision module is designed to be usable outside of the dynamic
@@ -28,13 +28,13 @@ In addition, each shape has a type member and a radius. The radius even
 applies to polygons, as discussed below.
 
 Keep in mind that a shape does not know about bodies and stand apart
-from the dynamics system. Shapes are stored in a compact form that is
+from the dynamics system[动力学系统]. Shapes are stored in a compact form that is
 optimized for size and performance. As such, shapes are not easily moved
-around. You have to manually set the shape vertex positions to move a
+around. You have to manually set the shape vertex positions[顶点位置] to move a
 shape. However, when a shape is attached to a body using a fixture, the
-shapes move rigidly with the host body. In summary:
-- When a shape is **not** attached to a body, you can view it's vertices as being expressed in world-space.
-- When a shape is attached to a body, you can view it's vertices as being expressed in local coordinates.
+shapes move rigidly with the host body[宿主刚体]. In summary:
+- When a shape is **not** attached to a body, you can view it's vertices[顶点] as being expressed in world-space[世界坐标系].
+- When a shape is attached to a body, you can view it's vertices as being expressed in local coordinates[局部坐标系].
 
 ### Circle Shapes
 Circle shapes have a position and radius. Circles are solid. You cannot
@@ -47,14 +47,14 @@ circle.m_radius = 0.5f;
 ```
 
 ### Polygon Shapes
-Polygon shapes are solid convex polygons. A polygon is convex when all
+Polygon shapes are solid convex polygons[实心凸多边形]. A polygon is convex when all
 line segments connecting two points in the interior do not cross any
 edge of the polygon. Polygons are solid and never hollow. A polygon must
 have 3 or more vertices.
 
 ![Convex and Concave Polygons](images/convex_concave.gif)
 
-Polygons vertices are stored with a counter clockwise winding (CCW). We
+Polygons vertices are stored with a counter clockwise winding (CCW,逆时针方向). We
 must be careful because the notion of CCW is with respect to a
 right-handed coordinate system with the z-axis pointing out of the
 plane. This might turn out to be clockwise on your screen, depending on
@@ -70,8 +70,8 @@ You can create a polygon shape by passing in a vertex array. The maximal
 size of the array is controlled by `b2_maxPolygonVertices` which has a
 default value of 8. This is sufficient to describe most convex polygons.
 
-The `b2PolygonShape::Set` function automatically computes the convex hull
-and establishes the proper winding order. This function is fast when the
+The `b2PolygonShape::Set` function automatically computes the convex hull[凸包：凸多边形中任意两点的最短路径都位于多边形内部]
+and establishes the proper winding order[连接顺序]. This function is fast when the
 number of vertices is low. If you increase `b2_maxPolygonVertices`, then
 the convex hull computation might become slow. Also note that the convex
 hull function may eliminate and/or re-order the points you provide.
@@ -134,7 +134,7 @@ edge shapes end-to-end. This can give rise to an unexpected artifact
 when a polygon slides along the chain of edges. In the figure below we
 see a box colliding with an internal vertex. These *ghost* collisions
 are caused when the polygon collides with an internal vertex generating
-an internal collision normal.
+an internal collision[内部碰撞] normal.[ghost collision指那些在实际情况下不应该发生，单由于算法或实现的限制而出现的错误碰撞，这种碰撞可能导致物体穿透，卡住或产生不真实的物理反应]
 
 ![Ghost Collision](images/ghost_collision.svg)
 
@@ -290,13 +290,13 @@ bool overlap = b2TestOverlap(shapeA, indexA, shapeB, indexB, xfA, xfB);
 
 Again you must provide child indices to for the case of chain shapes.
 
-### Contact Manifolds
+### Contact Manifolds[流形]
 Box2D has functions to compute contact points for overlapping shapes. If
 we consider circle-circle or circle-polygon, we can only get one contact
 point and normal. In the case of polygon-polygon we can get two points.
 These points share the same normal vector so Box2D groups them into a
 manifold structure. The contact solver takes advantage of this to
-improve stacking stability.
+improve stacking stability[堆叠的稳定性].
 
 ![Contact Manifold](images/manifolds.svg)
 
@@ -394,12 +394,12 @@ operates on axis-aligned bounding boxes (AABBs) with user data pointers.
 
 The dynamic tree is a hierarchical AABB tree. Each internal node in the
 tree has two children. A leaf node is a single user AABB. The tree uses
-rotations to keep the tree balanced, even in the case of degenerate
-input.
+rotations to keep the tree balanced, even in the case of degenerate[退化]
+input(由于特殊情况，边界条件或输入数据错误导致算法失效，性能下降或者得出不稳定的结果；在计算几何中退化输入包括共线的点，重合的边或面积为0的多边形；在物理模拟中，包括重叠的物体，无限大的质量或者无法处理的约束条件).
 
 The tree structure allows for efficient ray casts and region queries.
 For example, you may have hundreds of shapes in your scene. You could
-perform a ray cast against the scene in a brute force manner by ray
+perform a ray cast against the scene in a brute force[暴力，蛮力] manner by ray
 casting each shape. This would be inefficient because it does not take
 advantage of shapes being spread out. Instead, you can maintain a
 dynamic tree and perform ray casts against the tree. This traverses the
