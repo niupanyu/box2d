@@ -60,18 +60,18 @@ In the following discussion we use body interchangeably with rigid body.
 
 #### fixture
 A fixture binds a shape to a body and adds material properties such as
-density, friction[摩擦力], and restitution[反弹]. A fixture puts a shape into the
+density[密度 ], friction[摩擦力], and restitution[反弹]. A fixture puts a shape into the
 collision system (broad-phase) so that it can collide with other shapes.
 
 #### constraint
 A constraint is a physical connection that removes degrees of freedom
-from bodies. A 2D body has 3 degrees of freedom (two translation
+from bodies(消除物体自由度的物理连接). A 2D body has 3 degrees of freedom (two translation
 coordinates and one rotation coordinate). If we take a body and pin it
 to the wall (like a pendulum) we have constrained the body to the wall.
 At this point the body can only rotate about the pin, so the constraint
 has removed 2 degrees of freedom.
 
-#### contact constraint
+#### contact constraint [接触约束]
 A special constraint designed to prevent penetration of rigid bodies and
 to simulate friction and restitution. You do not create contact
 constraints; they are created automatically by Box2D.
@@ -81,11 +81,11 @@ This is a constraint used to hold two or more bodies together. Box2D
 supports several joint types: revolute[旋转关节], prismatic[棱柱关节,沿着公共轴滑动], distance[距离关节], and more.
 Some joints may have limits and motors.
 
-#### joint limit
+#### joint limit[关节限制]
 A joint limit restricts the range of motion of a joint. For example, the
-human elbow only allows a certain range of angles.
+human elbow[胳膊] only allows a certain range of angles.
 
-#### joint motor
+#### joint motor[关节马达]
 A joint motor drives the motion of the connected bodies according to the
 joint's degrees of freedom. For example, you can use a motor to drive
 the rotation of an elbow.
@@ -103,25 +103,25 @@ the number of constraints.
 
 #### continuous collision
 The solver advances bodies in time using discrete time steps. Without
-intervention this can lead to tunneling.
+intervention this can lead to tunneling[隧穿].
 ![Tunneling Effect](images/tunneling1.svg)
 
 Box2D contains specialized algorithms to deal with tunneling. First, the
 collision algorithms can interpolate[插值] the motion of two bodies to find
-the first time of impact (TOI). Second, there is a sub-stepping solver
+the first time of impact (TOI,首次碰撞时间). Second, there is a sub-stepping solver(分步求解器)
 that moves bodies to their first time of impact and then resolves the
 collision.
 
 ## Modules
-Box2D is composed of three modules: Common, Collision, and Dynamics. The
+Box2D is composed of three modules: Common, Collision, and Dynamics(运动). The
 Common module has code for allocation, math, and settings. The Collision
 module defines shapes, a broad-phase, and collision functions/queries.
 Finally the Dynamics module provides the simulation world, bodies,
 fixtures, and joints.
 ![Box2D Modules](images/modules.svg)
 
-## Units
-Box2D works with floating point numbers and tolerances have to be used
+## Units[单位]
+Box2D works with floating point numbers and tolerances(公差) have to be used
 to make Box2D perform well. These tolerances have been tuned to work
 well with meters-kilogram-second (MKS) units. In particular, Box2D has
 been tuned to work well with moving shapes between 0.1 and 10 meters. So
@@ -174,7 +174,7 @@ You can avoid merge conflicts by defining `B2_USER_SETTINGS` and providing
 ## Factories and Definitions
 Fast memory management plays a central role in the design of the Box2D
 API. So when you create a b2Body or a b2Joint, you need to call the
-factory functions on b2World. You should never try to allocate these
+factory functions[工厂函数] on b2World. You should never try to allocate these
 types in another manner.
 
 There are creation functions:
@@ -197,7 +197,7 @@ joint. By using this approach we can prevent construction errors, keep
 the number of function parameters small, provide sensible defaults, and
 reduce the number of accessors.
 
-Since fixtures (shapes) must be parented to a body, they are created and
+Since fixtures (shapes) must be parented to a body(夹具必须有父body), they are created and
 destroyed using a factory method on b2Body:
 
 ```cpp

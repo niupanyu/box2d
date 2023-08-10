@@ -95,7 +95,7 @@ Box2D uses approximate methods for a few reasons.
 * Some differential equations don't have known solutions
 * Some constraints cannot be determined uniquely
 
-What this means is that constraints are not perfectly rigid and sometimes you will see some bounce even when the restitution[恢复系数] is zero.
+What this means is that constraints are not perfectly rigid and sometimes you will see some bounce even when the restitution[恢复系数,弹性系数,取值范围0-1,计算公式 e = (相对速度_after) / (相对速度_before)] is zero.
 Box2D uses Gauss-Seidel to approximately solve constraints.
 Box2D also uses Semi-implicit Euler to approximately solve the differential equations[微分方程].
 Box2D also does not have exact collision. Polygons are covered with a thin skin (around 0.5cm thick) to avoid numerical problems. This can sometimes lead to unexpected contact normals[法线]. Also, some shapes may begin to overlap and then be pushed apart by the solver.

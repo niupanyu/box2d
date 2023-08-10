@@ -32,7 +32,7 @@
 // with your rendering engine in your game engine.
 DOCTEST_TEST_CASE("hello world")
 {
-	// Define the gravity vector.
+	// Define the gravity vector(重力矢量).
 	b2Vec2 gravity(0.0f, -10.0f);
 
 	// Construct a world object, which will hold and simulate the rigid bodies.
@@ -47,7 +47,7 @@ DOCTEST_TEST_CASE("hello world")
 	// The body is also added to the world.
 	b2Body* groundBody = world.CreateBody(&groundBodyDef);
 
-	// Define the ground box shape.
+	// Define the ground box shape.创建地面多边形
 	b2PolygonShape groundBox;
 
 	// The extents are the half-widths of the box.
@@ -71,7 +71,7 @@ DOCTEST_TEST_CASE("hello world")
 	fixtureDef.shape = &dynamicBox;
 
 	// Set the box density to be non-zero, so it will be dynamic.
-	fixtureDef.density = 1.0f;
+	fixtureDef.density = 1.0f;//自动计算body的质量
 
 	// Override the default friction.
 	fixtureDef.friction = 0.3f;

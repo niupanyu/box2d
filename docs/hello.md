@@ -157,7 +157,7 @@ So we have initialized the ground box and a dynamic box. Now we are
 ready to set Newton loose to do his thing. We just have a couple more
 issues to consider.
 
-Box2D uses a computational algorithm called an integrator. Integrators
+Box2D uses a computational algorithm[数值算法] called an integrator[积分器]. Integrators
 simulate the physics equations at discrete points of time. This goes
 along with the traditional game loop where we essentially have a flip
 book of movement on the screen. So we need to pick a time step for
@@ -167,7 +167,7 @@ but you will have to be more careful about setting up the definitions
 for your world. We also don't like the time step to change much. A
 variable time step produces variable results, which makes it difficult
 to debug. So don't tie the time step to your frame rate (unless you
-really, really have to). Without further ado, here is the time step.
+really, really have to). Without further ado[直截了当], here is the time step.
 
 ```cpp
 float timeStep = 1.0f / 60.0f;
@@ -178,18 +178,18 @@ called a constraint solver. The constraint solver solves all the
 constraints in the simulation, one at a time. A single constraint can be
 solved perfectly. However, when we solve one constraint, we slightly
 disrupt other constraints. To get a good solution, we need to iterate
-over all constraints a number of times.
+over all constraints a number of times.(为了得到一个良好的解，需要多次迭代所有约束)
 
 There are two phases in the constraint solver: a velocity phase and a
-position phase. In the velocity phase the solver computes the impulses
+position phase(速度与位置). In the velocity phase the solver computes the impulses[冲量]
 necessary for the bodies to move correctly. In the position phase the
 solver adjusts the positions of the bodies to reduce overlap and joint
-detachment. Each phase has its own iteration count. In addition, the
+detachment(调整物体的位置，减少物体之间的重叠与关节脱落). Each phase has its own iteration count. In addition, the
 position phase may exit iterations early if the errors are small.
 
 The suggested iteration count for Box2D is 8 for velocity and 3 for
 position. You can tune this number to your liking, just keep in mind
-that this has a trade-off between performance and accuracy. Using fewer
+that this has a trade-off between performance and accuracy(在性能与精度之间做折中). Using fewer
 iterations increases performance but accuracy suffers. Likewise, using
 more iterations decreases performance but improves the quality of your
 simulation. For this simple example, we don't need much iteration. Here
@@ -213,7 +213,7 @@ depending on your frame rate and your physics time step.
 The Hello World program was designed to be simple, so it has no
 graphical output. The code prints out the position and rotation of the
 dynamic body. Here is the simulation loop that simulates 60 time steps
-for a total of 1 second of simulated time.
+for a total of 1 second of simulated time.(模拟1秒内60个时间步的循环)
 
 ```cpp
 for (int32 i = 0; i < 60; ++i)
