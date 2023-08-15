@@ -20,6 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// https://learnopengl-cn.github.io/01%20Getting%20started/03%20Hello%20Window/
+
 #define _CRT_SECURE_NO_WARNINGS
 #define IMGUI_DISABLE_OBSOLETE_FUNCTIONS 1
 
@@ -501,16 +503,16 @@ int main(int, char**)
 #endif
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); // 指定使用的OpenGL版本为3.3，如果用户没有适当的版本，程序将无法运行
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 使用OpenGL核心模式，即只使用OpenGL功能的一个子集
 
 	sprintf(buffer, "Box2D Testbed Version %d.%d.%d", b2_version.major, b2_version.minor, b2_version.revision);
 
 	bool fullscreen = false;
 	if (fullscreen)
 	{
-		g_mainWindow = glfwCreateWindow(1920, 1080, buffer, glfwGetPrimaryMonitor(), NULL);
+		g_mainWindow = glfwCreateWindow(1920, 1080, buffer, glfwGetPrimaryMonitor(), NULL); //创建窗口width,height
 	}
 	else
 	{
@@ -526,10 +528,10 @@ int main(int, char**)
 
 	glfwGetWindowContentScale(g_mainWindow, &s_displayScale, &s_displayScale);
 
-	glfwMakeContextCurrent(g_mainWindow);
+	glfwMakeContextCurrent(g_mainWindow); // 通知GLFW将g_mainWindow的上下文设置为当前线程的主上下文
 
 	// Load OpenGL functions using glad
-	int version = gladLoadGL(glfwGetProcAddress);
+	int version = gladLoadGL(glfwGetProcAddress); // 使用glad来管理opengl的函数指针
 	printf("GL %d.%d\n", GLAD_VERSION_MAJOR(version), GLAD_VERSION_MINOR(version));
 	printf("OpenGL %s, GLSL %s\n", glGetString(GL_VERSION), glGetString(GL_SHADING_LANGUAGE_VERSION));
 
@@ -551,11 +553,11 @@ int main(int, char**)
 	// Control the frame rate. One draw per monitor refresh.
 	//glfwSwapInterval(1);
 
-	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);  // 清空屏幕的颜色缓冲
 
 	std::chrono::duration<double> frameTime(0.0);
 	std::chrono::duration<double> sleepAdjust(0.0);
-
+	// 渲染循环
 	while (!glfwWindowShouldClose(g_mainWindow))
 	{
 		std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
@@ -601,7 +603,7 @@ int main(int, char**)
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-		glfwSwapBuffers(g_mainWindow);
+		glfwSwapBuffers(g_mainWindow); // 交换颜色缓冲，存储glfw窗口每个像素颜色值 
 
 		if (s_testSelection != s_settings.m_testIndex)
 		{
@@ -611,7 +613,7 @@ int main(int, char**)
 			g_camera.ResetView();
 		}
 
-		glfwPollEvents();
+		glfwPollEvents(); // 事件处理
 
 		// Throttle to cap at 60Hz. This adaptive using a sleep adjustment. This could be improved by
 		// using mm_pause or equivalent for the last millisecond.

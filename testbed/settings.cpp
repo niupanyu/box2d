@@ -37,7 +37,7 @@ static bool sReadFile(char*& data, int& size, const char* filename)
 	}
 
 	fseek(file, 0, SEEK_END);
-	size = ftell(file);
+	size = ftell(file); //当前文件指针相对于文件头的偏移字节数
 	fseek(file, 0, SEEK_SET);
 
 	if (size == 0)
